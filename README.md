@@ -1,9 +1,9 @@
 # CarCar
 
-Team:
+Team: 15
 
-* Person 1 - Which microservice?
-* Person 2 - Which microservice?
+* Lauren - Service
+* Stephanie - Sales
 
 ## Design
 
