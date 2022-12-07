@@ -18,7 +18,7 @@ async function loadData(){
         console.log("AutomobileData:",automobileData)
     root.render(
       <React.StrictMode>
-        <App manufacturer={manufacturerData.manufacturer} vehicleModel={vehicleModelData.vehicleModel} automobile={automobileData.automobile}/>
+        <App manufacturer={manufacturerData.manufacturers} vehicleModel={vehicleModelData.models} automobile={automobileData.autos}/>
       </React.StrictMode>
     );
 }else{
