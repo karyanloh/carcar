@@ -11,25 +11,28 @@ class ManufacturerList extends React.Component {
 
             render() {
                 return (
-
-                    <table className="table table-stripped">
-                        <thead>
-                            <tr>
-                                <th>Manufacturer</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {this.state.manufacturersArray.map(manufacturer => {
-                                return (
-                                    <tr key = {manufacturer.id}>
-                                        <td>{manufacturer.name}</td>
-
+                    <div>
+                        <h1>Manufacturers</h1>
+                            <table className="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
                                     </tr>
-                                );
-                            })}
-                        </tbody>
-                    </table>
-                    )
+                                </thead>
+                                <tbody>
+                                    {this.state.manufacturersArray.map(manufacturer => {
+                                        return (
+                                            <tr key = {manufacturer.id}>
+                                                <td>{manufacturer.name}</td>
+
+                                            </tr>
+                                        );
+                                    })}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        )
+                    }
             }
-    }
 export default ManufacturerList;
