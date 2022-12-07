@@ -11,6 +11,7 @@ class AutomobileList extends React.Component {
         return (
             <div>
                 <h1>Automobiles Currently in Stock</h1>
+                <button type="button" className="btn btn-secondary"><a href='automobile/new'>Add new automobile</a></button>
                     <table className="table table-striped">
                         <thead>
                             <tr>

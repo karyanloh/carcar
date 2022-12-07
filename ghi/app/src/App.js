@@ -7,6 +7,7 @@ import ManufacturerList from './ManufacturerList';
 import NewManufacturerForm from './NewManufacturerForm';
 import './index.css'
 import AutomobileList from './AutomobileList';
+import AutomobileForm from './AutomobileForm';
 
 function App(props) {
 
@@ -24,7 +25,7 @@ function App(props) {
           <Route path="automobile" element={<AutomobileList automobile={props.automobile} />} />
           <Route path="manufacturer/new" element={<NewManufacturerForm manufacturer={props.manufacturer}/>}/>
           <Route path= "vehicles/new" element = {<VehicleForm vehicleModel={props.vehicleModel}/>}/>
-          {/* <Route path= "automobile/new" element = {<AutomobileForm automobile={props.automobile}/>}/>  */}
+          <Route path= "automobile/new" element = {<AutomobileForm automobile={props.automobile}/>}/>
         </Routes>
       </div>
     </BrowserRouter>
