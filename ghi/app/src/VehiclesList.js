@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderMatches } from 'react-router-dom';
-import Form from './VehicleForm.js'
+import VehicleForm from './VehicleForm.js'
 
 class VehiclesList extends React.Component{
     constructor(props){
@@ -8,21 +8,25 @@ class VehiclesList extends React.Component{
 
         this.state={
             vehiclesArray: this.props.vehicleModel,
-            test:""
+            showForm: false
         }
     }
 
-    addVehicle(value){
-        this.state.vehiclesArray.push(value)
-        const refresh = this.state.vehiclesArray
-        this.setState({vehiclesArray:refresh})
+    addVehicle(showFormValue){
+        this.setState({
+            showForm:showFormValue
+        })
     }
-
+    showForm(){
+        this.setState({showForm:!this.state.showForm})
+    }
 
 render(){
     return(
         <>
-         <Form addVehicle={this.addVehicle.bind(this)}/>
+        <h1>Vehicle models</h1>
+         <button type="button" className="btn btn-secondary" onClick={()=>{this.showForm()}}><a>Add new vehicle</a></button>
+         {this.state.showForm?<VehicleForm addVehicle={this.addVehicle.bind(this)}/>:
         <table className="table table-striped">
             <thead>
               <tr>
@@ -40,11 +44,11 @@ render(){
                     <td>{ vehicle.manufacturer.name }</td>
                     <td><img className="rounded float-left" src={ vehicle.picture_url }/></td>
                   </tr>
-
                 );
               })}
             </tbody>
           </table>
+            }
           </>
     )
 }

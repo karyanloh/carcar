@@ -7,15 +7,17 @@ class VehicleForm extends React.Component{
         this.state = {
             name: "",
             pictureUrl:"",
-            manufacturer:"",
+            manufacturerId:"",
             manufacturers:[]
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleManufacturerChange = this.handleManufacturerChange.bind(this);
     }
 
     async componentDidMount(){
+        console.log(this.props.addVehicle)
         const url = "http://localhost:8100/api/manufacturers/"
         const response = await fetch(url)
         if(response.ok){
@@ -26,12 +28,13 @@ class VehicleForm extends React.Component{
 
 
     async handleSubmit(event){
-        console.log("submitted")
         event.preventDefault();
         const data = {...this.state}
+        data.manufacturer_id = data.manufacturerId
         data.picture_url = data.pictureUrl
+        delete data.manufacturerId
         delete data.pictureUrl
-        delete data.manufacturer
+        delete data.manufacturers
 
         const vehicleUrl = "http://localhost:8100/api/models/"
         const fetchOptions={
@@ -41,17 +44,14 @@ class VehicleForm extends React.Component{
                 "Content-Type": "application/json",
             }
         }
+
         const response = await fetch(vehicleUrl, fetchOptions)
         if(response.ok){
             const newVehicle = await response.json();
-            console.log("newVeh:",newVehicle)
-            this.props.addVehicle(...this.state)
+            //clean up data to send to vehicle list
             // this.props.addVehicle(newVehicle)
-            this.setState({
-                name:"",
-                pictureUrl:"",
-                manufacturer:""
-            })
+            this.sendDataToList()
+
         }
     }
     handleChange(event, key){
@@ -64,6 +64,19 @@ class VehicleForm extends React.Component{
         })
         // this.props.addVehicle(converted)
     }
+    handleManufacturerChange(event){
+        const value = event.target.value
+        this.setState({manufacturerId:value})
+    }
+    sendDataToList(){
+        this.props.addVehicle(false)
+        this.setState({
+            name:"",
+            pictureUrl:"",
+            manufacturerId:""
+        })
+    }
+
 
     render(){
         return(
@@ -82,7 +95,7 @@ class VehicleForm extends React.Component{
                     <label htmlFor="picture_url">Picture Url</label>
                 </div>
                 <div className="mb-3">
-                    <select value={this.state.manufacturer} onChange={(e)=>{this.handleChange(e.target.value, "manufacturer")}} required id="manufacturer" name="manufacturer" className="form-select">
+                    <select value={this.state.manufacturerId} onChange={this.handleManufacturerChange} required id="manufacturer" name="manufacturer" className="form-select">
                     <option value="" disabled>Choose a manufacturer</option>
                     {this.state.manufacturers.map(manufacturer=>{
                         return(
