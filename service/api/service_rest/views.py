@@ -8,6 +8,10 @@ from .models import AutomobileVO, Technician, Appointment
 # Create your views here.
 
 
-api_list_techs
+@require_http_methods(["GET", "POST"])
+def api_techs(request, automobile_vo_id = None):
+    if request.method == "GET":
+        if automobile_vo_id is not None;
+        technician
 
 api_list_appts
