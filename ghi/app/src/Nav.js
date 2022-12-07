@@ -19,9 +19,9 @@ function Nav() {
             <li className="nav-item">
               <NavLink className="nav-link" to="/manufacturer">Manufacturers</NavLink>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <NavLink className="nav-link" to="/manufacturer/new">Add new manufacturer</NavLink>
-            </li>
+            </li> */}
             <li className="nav-item">
               <NavLink className="nav-link" to="/automobile">Automobiles in Stock</NavLink>
             </li>

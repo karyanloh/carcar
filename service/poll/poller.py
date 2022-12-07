@@ -30,6 +30,7 @@ def poll():
         print('Service poller polling for data')
         try:
             get_autos()
+            print('hey')
         except Exception as e:
             print(e, file=sys.stderr)
         time.sleep(60)

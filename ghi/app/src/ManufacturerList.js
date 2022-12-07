@@ -1,18 +1,32 @@
 import React from "react"
+import NewManufacturerForm from "./NewManufacturerForm"
+
 
 class ManufacturerList extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {manufacturersArray: this.props.manufacturer
+        this.state = {
+            manufacturersArray: this.props.manufacturer,
+            showForm: false
         }
 
     }
 
+    addManufacturer(showFormValue){
+        this.setState({
+            showForm: showFormValue
+        })
+    }
+    showForm(){
+        this.setState({showForm:!this.state.showForm})
+    }
 
             render() {
                 return (
                     <div>
                         <h1>Manufacturers</h1>
+                        <button type="button" className="btn btn-secondary" onClick={()=>{this.showForm()}}><a>Add new manufacturer</a></button>
+                        {this.state.showForm?<NewManufacturerForm addManufacturer={this.addManufacturer.bind(this)}/>:
                             <table className="table table-striped">
                                 <thead>
                                     <tr>
@@ -30,6 +44,7 @@ class ManufacturerList extends React.Component {
                                     })}
                                 </tbody>
                             </table>
+                            }
                         </div>
 
                         )
