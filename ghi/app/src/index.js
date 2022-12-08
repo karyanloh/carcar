@@ -13,12 +13,12 @@ async function loadData(){
     const manufacturerData = await manufacturerResponse.json()
     const vehicleModelData = await vehicleModelResponse.json()
     const automobileData = await automobileResponse.json()
-        console.log("ManufacturerData:", manufacturerData)
-        console.log("VehModelData:",vehicleModelData)
-        console.log("AutomobileData:",automobileData)
+
     root.render(
       <React.StrictMode>
-        <App manufacturer={manufacturerData.manufacturers} vehicleModel={vehicleModelData.models} automobile={automobileData.autos}/>
+        <App manufacturer={manufacturerData.manufacturers}
+        vehicleModel={vehicleModelData.models}
+        automobile={automobileData.autos} />
       </React.StrictMode>
     );
 }else{

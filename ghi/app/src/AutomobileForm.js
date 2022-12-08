@@ -33,7 +33,7 @@ class AutomobileForm extends React.Component{
         data.model_id = data.modelId
         delete data.modelId
         delete data.models
-
+        console.log("DATA:",data)
         const automobileUrl = "http://localhost:8100/api/automobiles/"
         const fetchOptions={
             method: 'post',
@@ -47,12 +47,7 @@ class AutomobileForm extends React.Component{
         if(response.ok){
             const newAutomobile = await response.json();
             console.log(newAutomobile)
-            this.setState({
-                color: "",
-                year:"",
-                vin:"",
-                modelId:""
-            })
+            this.sendDataToList()
         }
     }
     handleChange(event, key){
@@ -70,9 +65,13 @@ class AutomobileForm extends React.Component{
         this.setState({modelId:value})
     }
     sendDataToList(){
-        const vehicleData = {...this.state}
-        delete vehicleData.manufacturers
-        this.props.addVehicle(vehicleData)
+        this.props.addAutomobile(false)
+        this.setState({
+            color: "",
+            year:"",
+            vin:"",
+            modelId:""
+        })
     }
 
 
@@ -113,8 +112,6 @@ class AutomobileForm extends React.Component{
             </div>
             </div>
             </div>
-            {/* <div onClick={()=>{this.prepareFormData('abc')}}>add</div> */}
-            {/* <div onClick={()=>{this.props.addVehicle('data')}}>add</div> */}
             </>
         )
     };

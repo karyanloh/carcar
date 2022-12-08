@@ -8,12 +8,19 @@ import NewManufacturerForm from './NewManufacturerForm';
 import './index.css'
 import AutomobileList from './AutomobileList';
 import AutomobileForm from './AutomobileForm';
+import react, {useEffect, useState} from 'react';
 
 function App(props) {
 
   // if(props.manufacturers == undefined){
   //   return null;
   // }
+
+
+
+  // useEffect(()=>{
+
+  // },[])
   return (
     <BrowserRouter>
       <Nav />
