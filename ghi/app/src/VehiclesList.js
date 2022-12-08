@@ -24,10 +24,11 @@ class VehiclesList extends React.Component{
 render(){
     return(
         <>
+        {this.state.showForm?<VehicleForm addVehicle={this.addVehicle.bind(this)}/>:
+        <div>
         <h1>Vehicle models</h1>
          <button type="button" className="btn btn-secondary" onClick={()=>{this.showForm()}}><a>Add new vehicle</a></button>
-         {this.state.showForm?<VehicleForm addVehicle={this.addVehicle.bind(this)}/>:
-        <table className="table table-striped">
+         <table className="table table-striped">
             <thead>
               <tr>
                 <th>Name</th>
@@ -48,6 +49,7 @@ render(){
               })}
             </tbody>
           </table>
+          </div>
             }
           </>
     )
