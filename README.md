@@ -16,3 +16,7 @@ microservice, here.
 
 Explain your models and integration with the inventory
 microservice, here.
+To create a salesperson use this JSON body format:
+{
+	"name":"Bill"
+}

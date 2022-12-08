@@ -11,11 +11,11 @@ class InventoryEncoder(ModelEncoder):
 
 class SalesPersonListEncoder(ModelEncoder):
     model = SalesPerson
-    properties = ["name", "employee_id"]
+    properties = ["name", "employee_number"]
 
 class SalesPersonDetailEncoder(ModelEncoder):
     model = SalesPerson
-    properties = ["name","employee_id"]
+    properties = ["name","employee_number"]
 
     # def get_extra_data(self, o):
     #     return {
@@ -53,6 +53,52 @@ def api_list_salesperson(request):
             safe=False,
         )
 
+@require_http_methods(["DELETE", "GET", "PUT"])
+def api_show_salesperson(request, pk):
+    if request.method =="GET":
+        try:
+            salesperson = SalesPerson.objects.get(id=pk)
+            return JsonResponse(
+                salesperson,
+                encoder=SalesPersonDetailEncoder,
+                safe=False
+            )
+        except SalesPerson.DoesNotExist:
+            response = JsonResponse({"message": "Sales person does not exist"})
+            response.status_code = 404
+            return response
+    elif request.method == "DELETE":
+        try:
+            salesperson = SalesPerson.objects.get(id=pk)
+            salesperson.delete()
+            return JsonResponse(
+                salesperson,
+                encoder=SalesPersonListEncoder,
+                safe=False,
+            )
+        except SalesPerson.DoesNotExist:
+            return JsonResponse({"message": "Sales person does not exist"})
+    else: # PUT
+        try:
+            content = json.loads(request.body)
+            salesperson = SalesPerson.objects.get(id=pk)
+
+            props = ["name","employee_number"]
+            for prop in props:
+                if prop in content:
+                    setattr(salesperson, prop, content[prop])
+            salesperson.save()
+            return JsonResponse(
+                salesperson,
+                encoder=SalesPersonListEncoder,
+                safe=False,
+            )
+        except SalesPerson.DoesNotExist:
+            response = JsonResponse({"message": "Sales person does not exist"})
+            response.status_code = 404
+            return response
+
+
 @require_http_methods(["GET", "POST"])
 def api_list_customers(request):
     if request.method == "GET":
@@ -73,6 +119,51 @@ def api_list_customers(request):
             safe=False,
         )
 
+@require_http_methods(["DELETE", "GET", "PUT"])
+def api_show_customer(request, pk):
+    if request.method == "GET":
+        try:
+            customer = Customer.objects.get(id=pk)
+            return JsonResponse(
+                customer,
+                encoder=CustomerEncoder,
+                safe=False
+            )
+        except Customer.DoesNotExist:
+            response = JsonResponse({"message": "Customer does not exist"})
+            response.status_code = 404
+            return response
+    elif request.method == "DELETE":
+        try:
+            customer = Customer.objects.get(id=pk)
+            customer.delete()
+            return JsonResponse(
+                customer,
+                encoder=CustomerEncoder,
+                safe=False,
+            )
+        except Customer.DoesNotExist:
+            return JsonResponse({"message": "Customer does not exist"})
+    else: # PUT
+        try:
+            content = json.loads(request.body)
+            customer = Customer.objects.get(id=pk)
+
+            props = ["name", "address", "phone_number"]
+            for prop in props:
+                if prop in content:
+                    setattr(customer, prop, content[prop])
+            customer.save()
+            return JsonResponse(
+                customer,
+                encoder=CustomerEncoder,
+                safe=False,
+            )
+        except Customer.DoesNotExist:
+            response = JsonResponse({"message": "Customer does not exist"})
+            response.status_code = 404
+            return response
+
 @require_http_methods(["GET", "POST"])
 def api_list_sales_record(request, inventory_vo_id=None):
     if request.method == "GET":
@@ -80,7 +171,6 @@ def api_list_sales_record(request, inventory_vo_id=None):
             salesrecord = SalesRecord.objects.filter(inventory=inventory_vo_id)
         else:
             salesrecord = SalesRecord.objects.all()
-        # print(salesrecord)
         return JsonResponse(
             {"salesrecord": salesrecord},
             encoder=SalesRecordEncoder,
@@ -89,14 +179,10 @@ def api_list_sales_record(request, inventory_vo_id=None):
         print("POST sales record triggered")
 
         content = json.loads(request.body)
-        # print(f"2{content}")
         try:
             inventory_href = content["inventory"]
-            # print("IIIIII")
             inventories = InventoryVO.objects.get(import_href=inventory_href)
-            # print(bins)
             content["inventory"]= inventories
-            # print(bin_href, bins)
         except InventoryVO.DoesNotExist:
             return JsonResponse(
                 {"message": "Invalid inventory id"},
@@ -109,3 +195,48 @@ def api_list_sales_record(request, inventory_vo_id=None):
             encoder=SalesRecordEncoder,
             safe=False,
         )
+
+@require_http_methods(["DELETE", "GET", "PUT"])
+def api_show_sales_record(request, pk):
+    if request.method == "GET":
+        try:
+            salesrecord = SalesRecord.objects.get(id=pk)
+            return JsonResponse(
+                salesrecord,
+                encoder=SalesRecordEncoder,
+                safe=False
+            )
+        except SalesRecord.DoesNotExist:
+            response = JsonResponse({"message": "Sales record does not exist"})
+            response.status_code = 404
+            return response
+    elif request.method == "DELETE":
+        try:
+            salesrecord = SalesRecord.objects.get(id=pk)
+            salesrecord.delete()
+            return JsonResponse(
+                salesrecord,
+                encoder=SalesRecordEncoder,
+                safe=False,
+            )
+        except SalesRecord.DoesNotExist:
+            return JsonResponse({"message": "Sales record does not exist"})
+    else: # PUT
+        try:
+            content = json.loads(request.body)
+            salesrecord = SalesRecord.objects.get(id=pk)
+
+            props = ["inventory", "sales_person", "customer", "price"]
+            for prop in props:
+                if prop in content:
+                    setattr(salesrecord, prop, content[prop])
+            salesrecord.save()
+            return JsonResponse(
+                salesrecord,
+                encoder=SalesRecordEncoder,
+                safe=False,
+            )
+        except SalesRecord.DoesNotExist:
+            response = JsonResponse({"message": "Record does not exist"})
+            response.status_code = 404
+            return response
