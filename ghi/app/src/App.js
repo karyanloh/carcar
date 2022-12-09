@@ -9,6 +9,8 @@ import AutomobileList from './AutomobileList';
 import AutomobileForm from './AutomobileForm';
 import SalesPersonForm from './SalesPersonForm'
 import CustomerForm from './CustomerForm';
+import NewTechForm from './NewTechForm';
+import NewApptForm from './NewApptForm';
 import react, {useEffect, useState} from 'react';
 import './index.css'
 
@@ -44,6 +46,8 @@ function App(props) {
           <Route path= "automobile/new" element = {<AutomobileForm automobile={props.automobile}/>}/>
           <Route path= "salesperson/new" element = {<SalesPersonForm salesPerson={props.salesPerson}/>}/>
           <Route path= "customer/new" element = {<CustomerForm customer={props.customer}/>}/>
+          <Route path="tech/" element = {<NewTechForm technician={props.technician}/>}/>
+          <Route path="services/" element = {<NewApptForm appointment={props.appointment}/>}/>
         </Routes>
       </div>
     </BrowserRouter>

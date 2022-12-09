@@ -37,10 +37,10 @@ class Appointment(models.Model):
         # null=True,
         # blank=True,
     # )
-    # vip = something with boolean
+    # vip = something with booleanvip
     cust_name = models.CharField(max_length=200)
-    appt_date = models.DateTimeField()
-    appt_time = models.TimeField()
+    appt_date = models.DateField(default = ['%Y-%m-%d'])
+    appt_time = models.TimeField(default = ['%H:%M'])
     appt_reason = models.CharField(max_length=200)
 
     technician = models.ForeignKey(
@@ -51,6 +51,8 @@ class Appointment(models.Model):
         blank=True,
     )
     appt_reason = models.CharField(max_length=500)
+    vip = models.BooleanField(default=False)
+    # completed = models.BooleanField(default=False)
     status = models.CharField(max_length = 50, default = "scheduled")
     # status = models.ForeignKey(
     #     ApptStatus,
