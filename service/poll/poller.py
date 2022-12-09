@@ -15,7 +15,7 @@ django.setup()
 from service_rest.models import AutomobileVO
 
 def get_autos():
-    response = requests.get("http//:inventory-api:8000/api/services/")
+    response = requests.get("http://inventory-api:8000/api/automobiles/")
     content = json.loads(response.content)
     for automobile in content["automobiles"]:
         AutomobileVO.objects.update_or_create(
@@ -30,7 +30,7 @@ def poll():
         print('Service poller polling for data')
         try:
             get_autos()
-            print('hey')
+            print("party")
         except Exception as e:
             print(e, file=sys.stderr)
         time.sleep(60)

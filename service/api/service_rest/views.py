@@ -6,12 +6,96 @@ from common.json import ModelEncoder
 from .models import AutomobileVO, Technician, Appointment
 
 # Create your views here.
+class AutomobileVODetailEncoder(ModelEncoder):
+    model = AutomobileVO
+    properties = [
+        "import_href",
+        "vin",
+    ]
 
+class TechnicianDetailEncoder(ModelEncoder):
+    model = Technician
+    properties = [
+        "emp_name",
+        "emp_number",
+    ]
+
+class AppointmentListEncoder(ModelEncoder):
+    model = Appointment
+    properties = [
+        "auto_vin",
+        "cust_name",
+        "appt_date",
+        "technician",
+        "appt_reason",
+        "status"
+    ]
+    # def get_extra_data(self, o):
+    #     return {"automobile": o.automobile.vin}
+
+class AppointmentDetailEncoder(ModelEncoder):
+    model = Appointment
+    properties = [
+        "auto_vin",
+        "cust_name",
+        "appt_date",
+        "technician",
+        "appt_reason",
+        "status"
+    ]
+    encoders = {
+        # "automobile":
+        # AutomobileVODetailEncoder(),
+        "technician":
+        TechnicianDetailEncoder(),
+    }
 
 @require_http_methods(["GET", "POST"])
-def api_techs(request, automobile_vo_id = None):
+def api_techs(request):
     if request.method == "GET":
-        if automobile_vo_id is not None;
-        technician
+        technicians = Technician.objects.all()
+        return JsonResponse(
+            {"technicians": technicians},
+            encoder=TechnicianDetailEncoder,
+        )
+    else:
+        content = json.loads(request.body)
 
-api_list_appts
+        technician = Technician.objects.create(**content)
+        return JsonResponse(
+            technician,
+            encoder=TechnicianDetailEncoder,
+            safe=False
+        )
+
+@require_http_methods (["GET, POST"])
+def api_list_appt(request):
+    if request.method == "GET":
+        appointments = Appointment.objects.all()
+        return JsonResponse(
+            {"appointments" : appointments},
+            encoder = AppointmentListEncoder
+        )
+    else:
+        content = json.loads(request.body)
+
+        appointments = Appointment.objects.create(**content)
+        return JsonResponse(
+            appointments,
+            encoder=AppointmentDetailEncoder,
+            safe = False,
+        )
+
+@require_http_methods(["DELETE", "GET"])
+def api_show_appt(request, pk):
+    if request.method == "GET":
+        appointment = Appointment.objects.get(id=pk)
+        return JsonResponse(
+            appointment,
+            encoder=AppointmentDetailEncoder,
+            safe = False,
+        )
+    elif request.method == "DELETE":
+        count, _ = Appointment.objects.filter(id=pk).delete()
+        return JsonResponse({"deleted": count > 0})
+# api_list_appts
