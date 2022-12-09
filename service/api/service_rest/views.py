@@ -10,41 +10,53 @@ class AutomobileVODetailEncoder(ModelEncoder):
     model = AutomobileVO
     properties = [
         "import_href",
-        "vin",
+        "vin"
     ]
+    def get_extra_data(self, o):
+        return {"automobile": o.automobile.vin}
+
+
 
 class TechnicianDetailEncoder(ModelEncoder):
     model = Technician
     properties = [
         "emp_name",
-        "emp_number",
+        "emp_number"
     ]
+    # def get_extra_data(self, o):
+    #     return {"technician": o.technician.emp_number}
 
 class AppointmentListEncoder(ModelEncoder):
     model = Appointment
     properties = [
-        "auto_vin",
+        "id",
+        "vin",
         "cust_name",
         "appt_date",
+        "appt_time",
         "technician",
         "appt_reason",
         "status"
+
     ]
+    encoders = {"technician":TechnicianDetailEncoder}
     # def get_extra_data(self, o):
     #     return {"automobile": o.automobile.vin}
 
 class AppointmentDetailEncoder(ModelEncoder):
     model = Appointment
     properties = [
-        "auto_vin",
+        "id",
+        "vin",
         "cust_name",
         "appt_date",
+        "appt_time",
         "technician",
         "appt_reason",
-        "status"
+        "status",
     ]
     encoders = {
-        # "automobile":
+        # "vin":
         # AutomobileVODetailEncoder(),
         "technician":
         TechnicianDetailEncoder(),
@@ -68,16 +80,34 @@ def api_techs(request):
             safe=False
         )
 
-@require_http_methods (["GET, POST"])
-def api_list_appt(request):
+@require_http_methods(["GET", "POST"])
+def api_list_appt(request, vin_vo_id=None):
     if request.method == "GET":
-        appointments = Appointment.objects.all()
-        return JsonResponse(
-            {"appointments" : appointments},
-            encoder = AppointmentListEncoder
+        print('yo')
+        if vin_vo_id is not None:
+            appointments = Appointment.objects.filter(vin=vin_vo_id)
+        else:
+            appointments = Appointment.objects.all()
+            print(appointments)
+            return JsonResponse(
+                {"appointments" : appointments},
+                encoder = AppointmentListEncoder
         )
     else:
+        print('Get triggered')
         content = json.loads(request.body)
+        print(content)
+
+        try:
+            tech_id = content["technician"]
+            technician = Technician.objects.get(emp_number=tech_id)
+            content["technician"]= technician
+
+        except Technician.DoesNotExist:
+            return JsonResponse(
+                {"message": "invalid technician"},
+                status=400,
+            )
 
         appointments = Appointment.objects.create(**content)
         return JsonResponse(
