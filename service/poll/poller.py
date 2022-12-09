@@ -15,7 +15,7 @@ django.setup()
 from service_rest.models import AutomobileVO
 
 def get_autos():
-    response = requests.get("http:inventory-api:8100/api/services")
+    response = requests.get("http//:inventory-api:8000/api/services/")
     content = json.loads(response.content)
     for automobile in content["automobiles"]:
         AutomobileVO.objects.update_or_create(

@@ -11,11 +11,11 @@ class InventoryEncoder(ModelEncoder):
 
 class SalesPersonListEncoder(ModelEncoder):
     model = SalesPerson
-    properties = ["name", "employee_number"]
+    properties = ["name", "employee_number", "id"]
 
 class SalesPersonDetailEncoder(ModelEncoder):
     model = SalesPerson
-    properties = ["name","employee_number"]
+    properties = ["name","employee_number","id"]
 
     # def get_extra_data(self, o):
     #     return {
@@ -31,12 +31,16 @@ class CustomerEncoder(ModelEncoder):
 class SalesRecordEncoder(ModelEncoder):
     model = SalesRecord
     properties =["inventory", "sales_person", "customer","price"]
+    encoders ={
+        "inventory":InventoryEncoder(),
+        "sales_person":SalesPersonDetailEncoder(),
+        "customer":CustomerEncoder(),
+    }
 
 @require_http_methods(["GET", "POST"])
 def api_list_salesperson(request):
     if request.method == "GET":
         salesperson = SalesPerson.objects.all()
-        print(salesperson)
         return JsonResponse(
             {"salesperson": salesperson},
             encoder=SalesPersonListEncoder,
@@ -46,7 +50,6 @@ def api_list_salesperson(request):
 
         content = json.loads(request.body)
         salesperson = SalesPerson.objects.create(**content)
-        print(salesperson)
         return JsonResponse(
             salesperson,
             encoder=SalesPersonListEncoder,
@@ -180,12 +183,21 @@ def api_list_sales_record(request, inventory_vo_id=None):
 
         content = json.loads(request.body)
         try:
+            # match inventory
             inventory_href = content["inventory"]
             inventories = InventoryVO.objects.get(import_href=inventory_href)
             content["inventory"]= inventories
-        except InventoryVO.DoesNotExist:
+            # match salesperson
+            employee_num = content["sales_person"]
+            salesperson = SalesPerson.objects.get(employee_number=employee_num)
+            content["sales_person"]= salesperson
+            # match customer
+            customer_name= content["customer"]
+            customer = Customer.objects.get(name=customer_name)
+            content["customer"]= customer
+        except (InventoryVO.DoesNotExist, SalesPerson.DoesNotExist, Customer.DoesNotExist):
             return JsonResponse(
-                {"message": "Invalid inventory id"},
+                {"message": "Unable to create order due to information mismatch"},
                 status=400,
             )
         salesrecord = SalesRecord.objects.create(**content)

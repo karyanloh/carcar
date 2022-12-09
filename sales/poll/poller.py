@@ -25,6 +25,7 @@ def get_inventory():
             }
         )
 
+
 def poll():
     while True:
         print('Sales poller polling for data')
