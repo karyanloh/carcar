@@ -17,14 +17,43 @@ microservice, here.
 Explain your models and integration with the inventory
 microservice, here.
 ### Salesperson
+List salesperson
+Method: GET
+URL: http://localhost:8090/api/salesperson/
+
+Show salesperson by id
+Method: GET
+URL: http://localhost:8090/api/salesperson/int:pk/
+
+Create salesperson
+Method: POST
+URL: http://localhost:8090/api/salesperson/
 To create a salesperson use this JSON body format:
 {
-	"name":"Bill"
+	"name":"John",
+	"employee_number":"E007"
 }
 Expected result should look like this:
-
+{
+	"href": "/api/salesperson/3/",
+	"name": "John",
+	"employee_number": "E007",
+	"id": 3
+}
 
 ### Customer
+List Customers
+Method: GET
+URL: http://localhost:8090/api/customer/
+
+Show customer by id
+Method: GET
+URL: http://localhost:8090/api/customer/int:pk/
+
+Create Customer
+Method: POST
+URL: http://localhost:8090/api/customer/
+
 To create a customer use this JSON body format:
 {
 	"name": "Customer 1",
@@ -36,4 +65,48 @@ Expected result should look like this:
 	"name": "Customer 1",
 	"address": "123 Main St, Lakewood, WA 98405",
 	"phone_number": 1234561234
+}
+
+### Sales Record
+List Sales Record
+Method: GET
+URL: http://localhost:8090/api/sales/
+
+Show Sales Record by id
+Method: GET
+URL: http://localhost:8090/api/sales/int:pk/
+
+Create Sales Record
+Method: POST
+URL: http://localhost:8090/api/sales/
+
+To create a sales record used this JSON body format:
+{
+    "inventory":"/api/automobiles/vin/", <--- replace vin with the vin of the vehicle
+	"sales_person": "E001", <--- enter employee number here
+	"customer": "Customer 1", <--- enter customer name here
+	"price": 10000 <--- enter the sale price of the vehicle
+}
+
+Expected result should look like this:
+{
+	"inventory": {
+		"import_href": "/api/automobiles/1234567890/",
+		"color": "beige",
+		"year": 2021,
+		"vin": "1234567890"
+	},
+	"sales_person": {
+		"href": "/api/salesperson/1/",
+		"name": "Bill",
+		"employee_number": "E001",
+		"id": 1
+	},
+	"customer": {
+		"href": "/api/customer/1/",
+		"name": "Customer 1",
+		"address": "123 Main St, Lakewood, WA 98405",
+		"phone_number": 1234561234
+	},
+	"price": 10000
 }
