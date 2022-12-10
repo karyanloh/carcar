@@ -25,6 +25,16 @@ function Nav() {
             <li className="nav-item">
               <NavLink className="nav-link" to="/automobile">Automobiles in Stock</NavLink>
             </li>
+            {/* <li className="nav-item dropdown">
+          <a className="nav-link dropdown-toggle" to="/salesperson/new" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Sales
+          </a>
+          <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a className="dropdown-item" to="/salesperson/new">Add a Sales Person</a>
+            <a className="dropdown-item" to="/customer/new">Add a Potential Customer</a>
+            <a className="dropdown-item" to="sales/new">Add a Sale Record</a>
+          </div>
+          </li> */}
             <li className="nav-item">
               <NavLink className="nav-link" to="/salesperson/new" >Sales</NavLink>
             </li>
@@ -34,6 +44,12 @@ function Nav() {
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link" to="/customer/new">Add a Potential Customer</NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/sales/new">Add a Sales Record</NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/sales">List of All Sales</NavLink>
               </li>
               </ul>
           </ul>

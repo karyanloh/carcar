@@ -31,7 +31,7 @@ def poll():
         print('Sales poller polling for data')
         try:
            get_inventory()
-           print("GET inventory triggered")
+
         except Exception as e:
             print(e, file=sys.stderr)
         time.sleep(60)

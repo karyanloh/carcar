@@ -28,7 +28,6 @@ async function loadData(){
     const customerData = await customerRes.json()
     const salesRecordData = await salesRecordRes.json()
 
-
     root.render(
       <React.StrictMode>
         <App

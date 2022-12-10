@@ -31,7 +31,7 @@ class CustomerForm extends React.Component{
         const response = await fetch(url, fetchOptions)
         if(response.ok){
             const newCustomer = response.json()
-            console.log(`New customer successfully added!`)
+            console.log(`New customer successfully added! ${newCustomer}`)
             this.setState({
                 name:"",
                 address:"",
