@@ -84,7 +84,7 @@ To create a sales record used this JSON body format:
 {
     "inventory":"/api/automobiles/vin/", <--- replace vin with the vin of the vehicle
 	"sales_person": "E001", <--- enter employee number here
-	"customer": "Customer 1", <--- enter customer name here
+	"customer": 2 , <--- enter customer id here
 	"price": 10000 <--- enter the sale price of the vehicle
 }
 

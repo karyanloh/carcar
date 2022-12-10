@@ -26,11 +26,11 @@ class SalesPersonDetailEncoder(ModelEncoder):
 
 class CustomerEncoder(ModelEncoder):
     model = Customer
-    properties = ["name", "address", "phone_number"]
+    properties = ["id","name", "address", "phone_number"]
 
 class SalesRecordEncoder(ModelEncoder):
     model = SalesRecord
-    properties =["inventory", "sales_person", "customer","price"]
+    properties =["inventory", "sales_person", "customer","price","id"]
     encoders ={
         "inventory":InventoryEncoder(),
         "sales_person":SalesPersonDetailEncoder(),
@@ -192,8 +192,8 @@ def api_list_sales_record(request, inventory_vo_id=None):
             salesperson = SalesPerson.objects.get(employee_number=employee_num)
             content["sales_person"]= salesperson
             # match customer
-            customer_name= content["customer"]
-            customer = Customer.objects.get(name=customer_name)
+            customer_id= content["customer"]
+            customer = Customer.objects.get(id=customer_id)
             content["customer"]= customer
         except (InventoryVO.DoesNotExist, SalesPerson.DoesNotExist, Customer.DoesNotExist):
             return JsonResponse(

@@ -9,6 +9,8 @@ import AutomobileList from './AutomobileList';
 import AutomobileForm from './AutomobileForm';
 import SalesPersonForm from './SalesPersonForm'
 import CustomerForm from './CustomerForm';
+import SalesRecordForm from './SalesRecordForm';
+import AllSales from './AllSales';
 import NewTechForm from './NewTechForm';
 import NewApptForm from './NewApptForm';
 import react, {useEffect, useState} from 'react';
@@ -46,6 +48,8 @@ function App(props) {
           <Route path= "automobile/new" element = {<AutomobileForm automobile={props.automobile}/>}/>
           <Route path= "salesperson/new" element = {<SalesPersonForm salesPerson={props.salesPerson}/>}/>
           <Route path= "customer/new" element = {<CustomerForm customer={props.customer}/>}/>
+          <Route path= "sales/new" element = {<SalesRecordForm automobile={props.automobile} salesPerson={props.salesPerson} customer={props.customer} salesRecords={props.salesRecords}/>}/>
+          <Route path= "sales" element = {<AllSales salesRecords={props.salesRecord}/>}/>
           <Route path="tech/" element = {<NewTechForm technician={props.technician}/>}/>
           <Route path="services/" element = {<NewApptForm appointment={props.appointment}/>}/>
         </Routes>

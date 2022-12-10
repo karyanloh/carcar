@@ -1,6 +1,7 @@
 import React from "react";
 import AutomobileForm from "./AutomobileForm";
 
+
 class AutomobileList extends React.Component {
     constructor(props) {
         super(props)
@@ -8,6 +9,7 @@ class AutomobileList extends React.Component {
             automobilesArray: this.props.automobile,
             showForm: false
         }
+
     }
 
     addAutomobile(showFormValue){
@@ -18,11 +20,13 @@ class AutomobileList extends React.Component {
     showForm(){
         this.setState({showForm:!this.state.showForm})
     }
-
     render (){
         return (
+            <>
             <div>
-                {this.state.showForm?<AutomobileForm addAutomobile={this.addAutomobile.bind(this)}/>:
+                {this.state.showForm?
+                <AutomobileForm addAutomobile={this.addAutomobile.bind(this)}/>
+                :
                 <div>
                 <h1>Automobiles Currently in Stock</h1>
                 <button type="button" className="btn btn-secondary" onClick={()=>{this.showForm()}}>Add new automobile</button>
@@ -55,6 +59,7 @@ class AutomobileList extends React.Component {
                 }
 
                 </div>
+                </>
         )
     }
 }
