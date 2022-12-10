@@ -33,15 +33,18 @@ class AppointmentListEncoder(ModelEncoder):
         "vin",
         "cust_name",
         "appt_date",
-        "appt_time",
+        # "appt_time",
         "technician",
         "appt_reason",
-        "status"
+        "status",
+        "vip",
 
     ]
-    encoders = {"technician":TechnicianDetailEncoder}
+    encoders = {"technician":TechnicianDetailEncoder()}
     # def get_extra_data(self, o):
     #     return {"automobile": o.automobile.vin}
+    # def get_extra_data(self, o):
+    #     return {"technician": o.technician.emp_number}
 
 class AppointmentDetailEncoder(ModelEncoder):
     model = Appointment
@@ -50,10 +53,12 @@ class AppointmentDetailEncoder(ModelEncoder):
         "vin",
         "cust_name",
         "appt_date",
-        "appt_time",
+        # "appt_time",
         "technician",
         "appt_reason",
         "status",
+        "vip"
+
     ]
     encoders = {
         # "vin":
@@ -61,6 +66,8 @@ class AppointmentDetailEncoder(ModelEncoder):
         "technician":
         TechnicianDetailEncoder(),
     }
+    # def get_extra_data(self, o):
+    #     return {"technician": o.technician.emp_number}
 
 @require_http_methods(["GET", "POST"])
 def api_techs(request):

@@ -8,7 +8,7 @@ class NewApptForm extends React.Component {
             vin:"",
             custName:"",
             apptDate:"",
-            apptTime:"",
+            // apptTime:"",
             technician:"",
             apptReason:"",
             vip:"",
@@ -19,7 +19,7 @@ class NewApptForm extends React.Component {
         this.handleChangeVin = this.handleChangeVin.bind(this);
         this.handleChangeCustomer = this.handleChangeCustomer.bind(this);
         this.handleChangeDate = this.handleChangeDate.bind(this);
-        this.handleChangeTime = this.handleChangeTime.bind(this);
+        // this.handleChangeTime = this.handleChangeTime.bind(this);
         this.handleChangeTechnician = this.handleChangeTechnician.bind(this);
         this.handleChangeReason = this.handleChangeReason.bind(this);
         this.handleChangeStatus = this.handleChangeStatus.bind(this);
@@ -31,11 +31,11 @@ class NewApptForm extends React.Component {
         const data = {...this.state};
         data.cust_name = data.custName;
         data.appt_date = data.apptDate;
-        data.appt_time = data.apptTime;
+        // data.appt_time = data.apptTime;
         data.appt_reason = data.apptReason;
         delete data.custName;
         delete data.apptDate;
-        delete data.apptTime;
+        // delete data.apptTime;
         delete data.apptReason;
         console.log(data)
 
@@ -55,7 +55,7 @@ class NewApptForm extends React.Component {
                 vin:"",
                 custName:"",
                 apptDate:"",
-                apptTime:"",
+                // apptTime:"",
                 technician:"",
                 apptReason:"",
                 vip:"",
@@ -79,10 +79,10 @@ class NewApptForm extends React.Component {
         this.setState ({apptDate: value});
     }
 
-    handleChangeTime(event) {
-        const value = event.target.value;
-        this.setState ({apptTime: value});
-    }
+    // handleChangeTime(event) {
+    //     const value = event.target.value;
+    //     this.setState ({apptTime: value});
+    // }
 
     handleChangeTechnician(event) {
         const value = event.target.value;
@@ -123,10 +123,10 @@ class NewApptForm extends React.Component {
                       <input onChange={this.handleChangeDate} value={this.state.apptDate} placeholder="date" required type="text" name="date" id="date" className="form-control" />
                       <label htmlFor="date">Appointment Date</label>
                     </div>
-                    <div className="form-floating mb-3">
+                    {/* <div className="form-floating mb-3">
                       <input onChange={this.handleChangeTime} value={this.state.apptTime} placeholder="time" required type="text" name="time" id="time" className="form-control" />
                       <label htmlFor="time">Appointment Time</label>
-                    </div>
+                    </div> */}
                     <div className="form-floating mb-3">
                       <input onChange={this.handleChangeTechnician} value={this.state.technician} placeholder="technician" required type="text" name="technician" id="technician" className="form-control" />
                       <label htmlFor="technician">Technician</label>
