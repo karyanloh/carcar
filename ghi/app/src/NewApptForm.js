@@ -12,7 +12,7 @@ class NewApptForm extends React.Component {
             technician:"",
             apptReason:"",
             vip:"",
-            status: "",
+            status: "scheduled",
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -59,7 +59,7 @@ class NewApptForm extends React.Component {
                 technician:"",
                 apptReason:"",
                 vip:"",
-                status: "",
+                status: "scheduled",
             });
         }
     }
@@ -124,17 +124,17 @@ class NewApptForm extends React.Component {
                       <label htmlFor="date">Appointment Date (YYYY-MM-DD HH:MM)</label>
                     </div>
                     <div className="form-floating mb-3">
-                      <input onChange={this.handleChangeTechnician} value={this.state.technician} placeholder="technician" required type="text" name="technician" id="technician" className="form-control" />
+                      <input onChange={this.handleChangeTechnician} value={this.state.technician} placeholder="technician" required type="integer" name="technician" id="technician" className="form-control" />
                       <label htmlFor="technician">Technician Employee Number</label>
                     </div>
                     <div className="form-floating mb-3">
                       <input onChange={this.handleChangeReason} value={this.state.apptReason} placeholder="reason" required type="text" name="reason" id="reason" className="form-control" />
                       <label htmlFor="reason">Reason for Appointment</label>
                     </div>
-                    <div className="form-floating mb-3">
+                    {/* <div className="form-floating mb-3">
                       <input onChange={this.handleChangeStatus} value={this.state.status} placeholder="status" required type="text" name="status" id="status" className="form-control" />
                       <label htmlFor="status">Appointment Status</label>
-                    </div>
+                    </div> */}
                     <div className="form-floating mb-3">
                       <input onChange={this.handleChangeVip} value={this.state.vip} placeholder="vip" required type="vip" name="vip" id="vip" className="form-control" />
                       <label htmlFor="vip">VIP Status</label>
