@@ -20,6 +20,7 @@ class AutomobileVODetailEncoder(ModelEncoder):
 class TechnicianDetailEncoder(ModelEncoder):
     model = Technician
     properties = [
+        "id",
         "emp_name",
         "emp_number"
     ]
@@ -108,6 +109,11 @@ def api_list_appt(request, vin_vo_id=None):
             tech_id = content["technician"]
             technician = Technician.objects.get(emp_number=tech_id)
             content["technician"]= technician
+            try:
+                if AutomobileVO.objects.get(vin=content["vin"]):
+                    content["vip"] =True
+            except:
+                pass
 
         except Technician.DoesNotExist:
             return JsonResponse(

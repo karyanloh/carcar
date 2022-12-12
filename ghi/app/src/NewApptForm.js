@@ -11,8 +11,8 @@ class NewApptForm extends React.Component {
             // apptTime:"",
             technician:"",
             apptReason:"",
-            vip:"",
-            status: "",
+            // vip:"",
+            status: "scheduled",
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,7 +23,7 @@ class NewApptForm extends React.Component {
         this.handleChangeTechnician = this.handleChangeTechnician.bind(this);
         this.handleChangeReason = this.handleChangeReason.bind(this);
         this.handleChangeStatus = this.handleChangeStatus.bind(this);
-        this.handleChangeVip = this.handleChangeVip.bind(this);
+        // this.handleChangeVip = this.handleChangeVip.bind(this);
     }
 
     async handleSubmit(event) {
@@ -58,8 +58,8 @@ class NewApptForm extends React.Component {
                 // apptTime:"",
                 technician:"",
                 apptReason:"",
-                vip:"",
-                status: "",
+                // vip:"",
+                status: "scheduled",
             });
         }
     }
@@ -99,10 +99,10 @@ class NewApptForm extends React.Component {
         this.setState ({status: value});
     }
 
-    handleChangeVip(event) {
-        const value = event.target.value;
-        this.setState ({vip: value})
-    }
+    // handleChangeVip(event) {
+    //     const value = event.target.value;
+    //     this.setState ({vip: value})
+    // }
 
     render() {
         return (
@@ -124,21 +124,21 @@ class NewApptForm extends React.Component {
                       <label htmlFor="date">Appointment Date (YYYY-MM-DD HH:MM)</label>
                     </div>
                     <div className="form-floating mb-3">
-                      <input onChange={this.handleChangeTechnician} value={this.state.technician} placeholder="technician" required type="text" name="technician" id="technician" className="form-control" />
+                      <input onChange={this.handleChangeTechnician} value={this.state.technician} placeholder="technician" required type="integer" name="technician" id="technician" className="form-control" />
                       <label htmlFor="technician">Technician Employee Number</label>
                     </div>
                     <div className="form-floating mb-3">
                       <input onChange={this.handleChangeReason} value={this.state.apptReason} placeholder="reason" required type="text" name="reason" id="reason" className="form-control" />
                       <label htmlFor="reason">Reason for Appointment</label>
                     </div>
-                    <div className="form-floating mb-3">
+                    {/* <div className="form-floating mb-3">
                       <input onChange={this.handleChangeStatus} value={this.state.status} placeholder="status" required type="text" name="status" id="status" className="form-control" />
                       <label htmlFor="status">Appointment Status</label>
-                    </div>
-                    <div className="form-floating mb-3">
+                    </div> */}
+                    {/* <div className="form-floating mb-3">
                       <input onChange={this.handleChangeVip} value={this.state.vip} placeholder="vip" required type="vip" name="vip" id="vip" className="form-control" />
                       <label htmlFor="vip">VIP Status</label>
-                    </div>
+                    </div> */}
                     <button className="btn btn-primary">Create</button>
                   </form>
                 </div>
