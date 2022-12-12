@@ -19,24 +19,11 @@ function Nav() {
             <li className="nav-item">
               <NavLink className="nav-link" to="/manufacturer">Manufacturers</NavLink>
             </li>
-            {/* <li className="nav-item">
-              <NavLink className="nav-link" to="/manufacturer/new">Add new manufacturer</NavLink>
-            </li> */}
             <li className="nav-item">
               <NavLink className="nav-link" to="/automobile">Automobiles in Stock</NavLink>
             </li>
-            {/* <li className="nav-item dropdown">
-          <a className="nav-link dropdown-toggle" to="/salesperson/new" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Sales
-          </a>
-          <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a className="dropdown-item" to="/salesperson/new">Add a Sales Person</a>
-            <a className="dropdown-item" to="/customer/new">Add a Potential Customer</a>
-            <a className="dropdown-item" to="sales/new">Add a Sale Record</a>
-          </div>
-          </li> */}
             <li className="nav-item">
-              <NavLink className="nav-link" to="/salesperson/new" >Sales</NavLink>
+              <NavLink className="nav-link" to="/sales" >Sales</NavLink>
             </li>
               <ul>
               <li className="nav-item">
@@ -55,6 +42,10 @@ function Nav() {
                 <NavLink className="nav-link" to="/salesperson/history">List Sales by Sales Person</NavLink>
               </li>
               </ul>
+              <li className="nav-item">
+              <NavLink className="nav-link" to="/services/" >Service</NavLink>
+            </li>
+            <ul>
             <li className="nav-item">
               <NavLink className="nav-link" to="/tech/">Add a technician</NavLink>
             </li>
@@ -67,6 +58,7 @@ function Nav() {
             <li className="nav-item">
               <NavLink className="nav-link" to="/services/history">View Service History</NavLink>
             </li>
+            </ul>
           </ul>
         </div>
       </div>
