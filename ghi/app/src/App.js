@@ -15,7 +15,6 @@ import NewTechForm from './NewTechForm';
 import NewApptForm from './NewApptForm';
 import SalesByEmployeeId from './SalesByEmpId';
 import ApptList from './ApptList';
-import react, {useEffect, useState} from 'react';
 import './index.css'
 import ApptHistory from './ApptHistory';
 
@@ -27,16 +26,6 @@ import ApptHistory from './ApptHistory';
 
 
 function App(props) {
-
-  // if(props.manufacturers == undefined){
-  //   return null;
-  // }
-
-
-
-  // useEffect(()=>{
-
-  // },[])
   return (
     <BrowserRouter>
       <Nav />
