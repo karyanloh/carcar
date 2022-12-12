@@ -39,9 +39,10 @@ class Appointment(models.Model):
     # )
     # vip = something with booleanvip
     cust_name = models.CharField(max_length=200)
-    appt_date = models.DateField(default = ['%Y-%m-%d'])
-    appt_time = models.TimeField(default = ['%H:%M'])
-    appt_reason = models.CharField(max_length=200)
+    appt_date = models.DateTimeField(default = ['%Y-%m-%d %H:%M'])
+    # appt_date = models.DateField(default = ['%Y-%m-%d'])
+    # appt_time = models.TimeField(default = ['%H:%M'])
+    # appt_reason = models.CharField(max_length=200)
 
     technician = models.ForeignKey(
         Technician,
