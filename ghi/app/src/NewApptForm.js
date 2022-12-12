@@ -121,15 +121,11 @@ class NewApptForm extends React.Component {
                     </div>
                     <div className="form-floating mb-3">
                       <input onChange={this.handleChangeDate} value={this.state.apptDate} placeholder="date" required type="text" name="date" id="date" className="form-control" />
-                      <label htmlFor="date">Appointment Date</label>
+                      <label htmlFor="date">Appointment Date (YYYY-MM-DD HH:MM)</label>
                     </div>
-                    {/* <div className="form-floating mb-3">
-                      <input onChange={this.handleChangeTime} value={this.state.apptTime} placeholder="time" required type="text" name="time" id="time" className="form-control" />
-                      <label htmlFor="time">Appointment Time</label>
-                    </div> */}
                     <div className="form-floating mb-3">
                       <input onChange={this.handleChangeTechnician} value={this.state.technician} placeholder="technician" required type="text" name="technician" id="technician" className="form-control" />
-                      <label htmlFor="technician">Technician</label>
+                      <label htmlFor="technician">Technician Employee Number</label>
                     </div>
                     <div className="form-floating mb-3">
                       <input onChange={this.handleChangeReason} value={this.state.apptReason} placeholder="reason" required type="text" name="reason" id="reason" className="form-control" />
