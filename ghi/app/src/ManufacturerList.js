@@ -23,10 +23,11 @@ class ManufacturerList extends React.Component {
 
             render() {
                 return (
-                    <div>
+                    <>
+                        {this.state.showForm?<NewManufacturerForm addManufacturer={this.addManufacturer.bind(this)}/>:
+                        <div>
                         <h1>Manufacturers</h1>
                         <button type="button" className="btn btn-secondary" onClick={()=>{this.showForm()}}><a>Add new manufacturer</a></button>
-                        {this.state.showForm?<NewManufacturerForm addManufacturer={this.addManufacturer.bind(this)}/>:
                             <table className="table table-striped">
                                 <thead>
                                     <tr>
@@ -44,9 +45,9 @@ class ManufacturerList extends React.Component {
                                     })}
                                 </tbody>
                             </table>
-                            }
                         </div>
-
+            }
+                    </>
                         )
                     }
             }
