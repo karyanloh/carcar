@@ -17,6 +17,7 @@ import SalesByEmployeeId from './SalesByEmpId';
 import ApptList from './ApptList';
 import react, {useEffect, useState} from 'react';
 import './index.css'
+import ApptHistory from './ApptHistory';
 
 
 
@@ -56,6 +57,7 @@ function App(props) {
           <Route path="tech/" element = {<NewTechForm technician={props.technician}/>}/>
           <Route path="services/new" element = {<NewApptForm appointment={props.appointment}/>}/>
           <Route path="services/" element = {<ApptList appointment={props.appointment}/>}/>
+          <Route path="services/history" element = {<ApptHistory appointment={props.appointment}/>}/>
         </Routes>
       </div>
     </BrowserRouter>

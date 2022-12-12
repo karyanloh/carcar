@@ -106,7 +106,7 @@ class ApptList extends React.Component {
                         <td>{ appointments.vin}</td>
                         <td>{ appointments.cust_name}</td>
                         <td>{ appointments.appt_date }</td>
-                        <td>{ appointments.technician.emp_number }</td>
+                        <td>{ appointments.technician.emp_name }</td>
                         <td>{ appointments.appt_reason }</td>
                         <td>{ appointments.vip ? "Yes": "No"}</td>
                         {/* <td>{ appointments.status}</td> */}
