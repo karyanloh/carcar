@@ -47,7 +47,7 @@ async handleSubmit(event){
     }
 }
 updateAutomobileData(value){
-    console.log(value)
+
     const updatedAutomobile = [...this.state.automobiles]
     console.log(updatedAutomobile)
 
@@ -95,11 +95,11 @@ render(){
                 <h1>Record a new sale</h1>
                 <form onSubmit={this.handleSubmit} id="new-sale-form">
                 <div className="mb-3">
-                    <select value={this.state.automobile} onChange={this.handleAutomobileChange} onClick={(e)=>{this.updateAutomobileData(e.target.value)}} required id="automobile" name="automobile" className="form-select">
+                    <select value={this.state.automobile} onChange={this.handleAutomobileChange}  required id="automobile" name="automobile" className="form-select">
                     <option value="" disabled>Choose an automobile</option>
                     {this.state.automobiles.map(automobile=>{
                         return(
-                                <option  key={automobile.href} value={automobile.href}>
+                                <option key={automobile.href} value={automobile.href}>
                                 {automobile.vin}
                             </option>
                         );
