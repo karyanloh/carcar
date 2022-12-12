@@ -11,6 +11,42 @@ Team: 15
 
 Explain your models and integration with the inventory
 microservice, here.
+### Technicians
+List technician
+Method: GET
+URL:
+
+Show technician by id
+Method: GET
+URL:
+
+Create technician
+Method: POST
+URL:
+To create a technician use this JSON body format:
+
+
+Expected result should look like this:
+
+
+### Appointments
+List Appointments
+Method: GET
+URL:
+
+Show appointments by id
+Method: GET
+URL:
+
+Create Appointment
+Method: POST
+URL:
+
+To create an appointment use this JSON body format:
+
+Expected result should look like this:
+
+
 
 ## Sales microservice
 

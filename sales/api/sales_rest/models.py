@@ -22,7 +22,7 @@ class SalesPerson(models.Model):
 class Customer(models.Model):
     name = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
-    phone_number = models.IntegerField()
+    phone_number = models.BigIntegerField()
 
     def get_api_url(self):
         return reverse("api_show_customer", kwargs={"pk":self.pk})
