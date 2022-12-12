@@ -77,7 +77,7 @@ class ApptHistory extends React.Component {
             <form>
                 <div>
                 <input value = {this.state.search} onChange = {this.handleChange} type = "text" className = "form-control" placeholder = "VIN" id="search" name = "search" />
-                <button onClick={this.handleSubmit} className = "input-text">Service History by Vin</button>
+                <button onClick={this.handleSubmit} className = "btn btn-info">Service History by Vin</button>
                 </div>
             </form>
 
@@ -127,11 +127,6 @@ class ApptHistory extends React.Component {
                         </tbody>
                     </table>
                     </div>
-
-
-
-
-
         );
 
     }
