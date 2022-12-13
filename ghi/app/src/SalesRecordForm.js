@@ -8,9 +8,9 @@ class SalesRecordForm extends React.Component{
             automobile:"",
             automobiles: [],
             salesPerson: "",
-            salesPersons: this.props.salesPerson,
+            salesPersons:[],
             customer:"",
-            customers: this.props.customer,
+            customers: [],
             price:""
         }
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -20,6 +20,19 @@ class SalesRecordForm extends React.Component{
         this.handlePriceChange = this.handlePriceChange.bind(this)
 }
 async componentDidMount(){
+    const salespersonUrl = "http://localhost:8090/api/salesperson/"
+    const salespersonRes = await fetch(salespersonUrl)
+    if(salespersonRes.ok){
+        const salespersonData = await salespersonRes.json()
+        this.setState({salesPersons: salespersonData.salesperson})
+    }
+
+    const customerUrl = "http://localhost:8090/api/customer/"
+    const customerRes = await fetch(customerUrl)
+    if(customerRes.ok){
+        const customerData = await customerRes.json()
+        this.setState({customers: customerData.customer})
+    }
     const url = "http://localhost:8090/api/sales/"
     const salesRes = await fetch(url)
     if(salesRes.ok){
@@ -32,8 +45,7 @@ async componentDidMount(){
         if(vehicleRes.ok){
             const vehicleData = await vehicleRes.json()
             const vehicles = vehicleData.autos
-            console.log(vehicles)
-            const availableVehicles = vehicles.filter(vehicle=> !soldVehicles.includes(vehicle.vin))
+            const availableVehicles = vehicles.filter(vehicle=> !soldVehicles.vin)
             this.setState({automobiles:availableVehicles})
         }
     }
