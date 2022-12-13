@@ -6,7 +6,7 @@ Team: 15
 * Stephanie - Sales
 
 ## Design
-
+![image.png](./image.png)
 ## Service microservice
 Services microservice
 
