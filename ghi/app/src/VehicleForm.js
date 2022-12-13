@@ -56,7 +56,6 @@ class VehicleForm extends React.Component{
         }
     }
     handleChange(event, key){
-        console.log(event, key)
         var value = event
         this.setState({
             ...this.state,
