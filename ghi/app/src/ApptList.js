@@ -5,15 +5,13 @@ class ApptList extends React.Component {
         super(props);
 
         this.state = {
-            // apptArray: this.props.appointments
+
             appts: [],
         }
 
-        // this.cancelAppointment = this.cancelAppointment.bind(this);
-        // this.finishAppointment = this.finishAppointment.bind(this);
 
     }
-    ///filter for "scheduled"
+
     async componentDidMount() {
         const url = 'http://localhost:8080/api/services/';
         const response = await fetch(url)
@@ -25,7 +23,7 @@ class ApptList extends React.Component {
         }
     }
 
-            //put in a handleclick fxn for buttons
+
 
     async handleClick(event) {
         event.preventDefault();
@@ -52,37 +50,6 @@ class ApptList extends React.Component {
         }
     }
 
-    // async cancelAppointment(appointment) {
-    //     const cancelUrl = `http://localhost:8080/api/services/${appointment.id}`
-    //     let fetchConfig = {
-    //         method: "delete"
-    //     }
-    //     await fetch(cancelUrl, fetchConfig)
-    //     console.log(cancelUrl, fetchConfig)
-
-    //     const idx = this.state.appointments.indexOf(appointment)
-    //     console.log(idx)
-    //     const cancelled_appts = [...this.state.appointments]
-    //     cancelled_appts.splice(idx, 1)
-    //     this.setState({appts: cancelled_appts})
-    // }
-
-    // async finishAppointment(appointment) {
-    //     const finishUrl = `http://localhost:8080/api/services/${appointment.id}`
-    //     const fetchConfig = {
-    //         method: "put",
-    //         body: JSON.stringify({"completed": "True"}),
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         }
-    //     }
-
-    //     await fetch(finishUrl, fetchConfig)
-    //     const idx = this.state.appointments.indexOf(appointment)
-    //     const finished_appts = [...this.state.appointments]
-    //     finished_appts.splice(idx, 1)
-    //     this.setState({ appts: finished_appts})
-    // }
 
 
     render() {
@@ -109,14 +76,11 @@ class ApptList extends React.Component {
                         <td>{ appointments.technician.emp_name }</td>
                         <td>{ appointments.appt_reason }</td>
                         <td>{ appointments.vip ? "Yes": "No"}</td>
-                        {/* <td>{ appointments.status}</td> */}
                         <td>
                             <button onClick = {this.handleClick} name = {appointments.id} value = "cancelled" type = "button" className = "btn btn-danger">
                                 Cancel</button>
                             <button onClick = {this.handleClick} name = {appointments.id} value = "finished" type = "button" className = "btn btn-info"> Finished</button>
                         </td>
-                        {/* <td><button className = "btn btn-danger" onClick = {() => this.cancelAppointment(appointments)}>Cancel</button></td>
-                        <td><button className = "btn btn-info" onClick = {() => this.finishAppointment(appointments)}>Completed</button></td> */}
 
                     </tr>
                 );
