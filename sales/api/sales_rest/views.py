@@ -17,12 +17,6 @@ class SalesPersonDetailEncoder(ModelEncoder):
     model = SalesPerson
     properties = ["name","employee_number","id"]
 
-    # def get_extra_data(self, o):
-    #     return {
-    #         "customer":o.sales.customer,
-    #         "vin": o.sales.inventory.vin,
-    #         "price": o.sales.price
-    #         }
 
 class CustomerEncoder(ModelEncoder):
     model = Customer
