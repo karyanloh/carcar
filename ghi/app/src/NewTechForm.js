@@ -14,9 +14,6 @@ class NewTechForm extends React.Component {
         this.handleChangeNumber = this.handleChangeNumber.bind(this);
     }
 
-    // async componentDidMount(){
-
-    // }
 
     async handleSubmit(event) {
         event.preventDefault();
@@ -25,7 +22,6 @@ class NewTechForm extends React.Component {
         data.emp_number = data.empNumber;
         delete data.empName;
         delete data.empNumber;
-        // console.log(data)
 
         const techUrl = "http://localhost:8080/api/tech/"
         const fetchOptions = {
@@ -38,7 +34,7 @@ class NewTechForm extends React.Component {
         const response = await fetch(techUrl, fetchOptions);
         if(response.ok){
             const newTech = await response.json();
-            // console.log('testing')
+            
                 this.setState({
                     empName:"",
                     empNumber:"",

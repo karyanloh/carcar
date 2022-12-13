@@ -5,7 +5,7 @@ import json
 from common.json import ModelEncoder
 from .models import AutomobileVO, Technician, Appointment
 
-# Create your views here.
+
 class AutomobileVODetailEncoder(ModelEncoder):
     model = AutomobileVO
     properties = [
@@ -24,8 +24,7 @@ class TechnicianDetailEncoder(ModelEncoder):
         "emp_name",
         "emp_number"
     ]
-    # def get_extra_data(self, o):
-    #     return {"technician": o.technician.emp_number}
+
 
 class AppointmentListEncoder(ModelEncoder):
     model = Appointment
@@ -34,7 +33,6 @@ class AppointmentListEncoder(ModelEncoder):
         "vin",
         "cust_name",
         "appt_date",
-        # "appt_time",
         "technician",
         "appt_reason",
         "status",
@@ -42,10 +40,6 @@ class AppointmentListEncoder(ModelEncoder):
 
     ]
     encoders = {"technician":TechnicianDetailEncoder()}
-    # def get_extra_data(self, o):
-    #     return {"automobile": o.automobile.vin}
-    # def get_extra_data(self, o):
-    #     return {"technician": o.technician.emp_number}
 
 class AppointmentDetailEncoder(ModelEncoder):
     model = Appointment
@@ -54,7 +48,6 @@ class AppointmentDetailEncoder(ModelEncoder):
         "vin",
         "cust_name",
         "appt_date",
-        # "appt_time",
         "technician",
         "appt_reason",
         "status",
@@ -62,13 +55,10 @@ class AppointmentDetailEncoder(ModelEncoder):
 
     ]
     encoders = {
-        # "vin":
-        # AutomobileVODetailEncoder(),
         "technician":
         TechnicianDetailEncoder(),
     }
-    # def get_extra_data(self, o):
-    #     return {"technician": o.technician.emp_number}
+
 
 @require_http_methods(["GET", "POST"])
 def api_techs(request):
@@ -95,13 +85,11 @@ def api_list_appt(request, vin_vo_id=None):
             appointments = Appointment.objects.filter(vin=vin_vo_id)
         else:
             appointments = Appointment.objects.all()
-            print(appointments)
             return JsonResponse(
                 {"appointments" : appointments},
                 encoder = AppointmentListEncoder
         )
     else:
-        print('Get triggered')
         content = json.loads(request.body)
         print(content)
 
@@ -155,9 +143,6 @@ def api_show_appt(request, pk):
                 encoder = AppointmentDetailEncoder,
                 safe=False
             )
-            # if "status" in content:
-            #     status = Appointment.objects.get(content["status"])
-            #     content["status"] = status
 
         except Appointment.DoesNotExist:
             response = JsonResponse({"message": "This appointment does not exist"},
@@ -170,4 +155,3 @@ def api_show_appt(request, pk):
             encoder = AppointmentDetailEncoder,
             safe=False,
         )
-# api_list_appts

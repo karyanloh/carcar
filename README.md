@@ -2,18 +2,28 @@
 
 Team: 15
 
-* Lauren - Service
+* Lauren - Services
 * Stephanie - Sales
 
 ## Design
 
 ## Service microservice
+Services microservice
 
-Explain your models and integration with the inventory
-microservice, here.
+The models in the services microservice are the Technician model, the Appointment model, and the AutomobileVO model.  The Technician model establishes the required fields to create a technician, and the parameters for those fields.  The required fields are emp_name for the technician's name, and emp_number for the technician's unique employee number.  The Appointment model establishes the required fields to create a service appointment for a vehicle, and the parameters for those fields.  The required fields are vin for the vin of the vehicle, cust_name for the name of the customer who brought in the vehicle, appt_date for the date and time of the appointment, technician for the technician who will be providing the service, which is referenced via a ForeignKey to that links to the Technician model, appt_reason for the reason for the service appointment, vip which determines if the vehicle came from our inventory and receives special service and defaults to False unless the VIN is recognized as a match to one in the inventory microservice, and status which states the current status of the appointment and defaults to "scheduled" upon submission of a new appointment.  The AutomobileVO model establishes the automobile as a value object, along with the necessary parameters for integration with the inventory microservice.   The required fields are import_href for that specific automobile's unique id, and vin for the vin of the vehicle.  The vin field in this model is used as the reference point against the vins listed in the inventory microservice, to determine if the vehicle came from our inventory or not, which will then determine the vip status.
+
+Automobile is a value object in the services microservice, because the automobile is an object in the inventory microservice, and in the services microservice it is linked back to the vins in the inventory microservice to determine if the vehicle came from our inventory or not, which will then determine vip status during service appointment scheduling
+
+
+Sales microservice
+
+The models are the SalesPerson model, the Customer model, the SalesRecord model, and the InventoryVO model.  The SalesPerson model establishes the required fields to create a salesperson, and the parameters for those fields.   The required fields are name for the salesperson’s name, and employee_number for their employee number.  The Customer model establishes the required fields to create a customer, and the parameters for those fields.   The required fields are name for the customer’s name, address for the customer’s address, and phone_number for the customer’s phone number.   The SalesRecord model establishes the required fields to create a sales record, and the parameters for those fields.  The required fields are inventory for the specific automobile from inventory being sold, which is referenced via a ForeignKey, sales_person for the salesperson who completed the sale, which is referenced via a ForeignKey, customer for the customer who purchased the automobile that was part of the sale, which is referenced via a ForeignKey, and price for the price of the automobile that was sold.   The InventoryVO model establishes an automobile as a value object, along with the necessary parameters for integration with the inventory microservice.  The required fields are the import_href for that specific automobile’s unique id, color for the color of the vehicle, year for the year the vehicle was made, and vin for the vin of the vehicle.  The vin field in this model is used as the reference point against the vins listed in the inventory microservice, to determine if the vehicle is currently in our inventory.
+
+The automobile is a value object in the sales microservice (via the InventoryVO), because the automobile is an object in the inventory microservice, and in the sales microservice it is used to link back to the vins in the inventory microservice to determine if a vehicle is available for sale.
+
 
 ### How to Run the Application
-Enter the following command to clone the repo into your directory: git clone https://gitlab.com/sjp19-public-resources/sjp-2022-april/project-beta
+Enter the following command to clone the repo into your directory: git clone https://gitlab.com/karyansloh/project-beta
 
 To create the necessary Docker containers, open Docker desktop, and enter the following commands into your terminal:
 

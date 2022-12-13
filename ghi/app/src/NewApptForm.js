@@ -8,10 +8,8 @@ class NewApptForm extends React.Component {
             vin:"",
             custName:"",
             apptDate:"",
-            // apptTime:"",
             technician:"",
             apptReason:"",
-            // vip:"",
             status: "scheduled",
         };
 
@@ -19,11 +17,10 @@ class NewApptForm extends React.Component {
         this.handleChangeVin = this.handleChangeVin.bind(this);
         this.handleChangeCustomer = this.handleChangeCustomer.bind(this);
         this.handleChangeDate = this.handleChangeDate.bind(this);
-        // this.handleChangeTime = this.handleChangeTime.bind(this);
         this.handleChangeTechnician = this.handleChangeTechnician.bind(this);
         this.handleChangeReason = this.handleChangeReason.bind(this);
         this.handleChangeStatus = this.handleChangeStatus.bind(this);
-        // this.handleChangeVip = this.handleChangeVip.bind(this);
+
     }
 
     async handleSubmit(event) {
@@ -31,13 +28,10 @@ class NewApptForm extends React.Component {
         const data = {...this.state};
         data.cust_name = data.custName;
         data.appt_date = data.apptDate;
-        // data.appt_time = data.apptTime;
         data.appt_reason = data.apptReason;
         delete data.custName;
         delete data.apptDate;
-        // delete data.apptTime;
         delete data.apptReason;
-        console.log(data)
 
         const serviceUrl = "http://localhost:8080/api/services/"
         const fetchOptions = {
@@ -50,15 +44,13 @@ class NewApptForm extends React.Component {
         const response = await fetch(serviceUrl, fetchOptions);
         if(response.ok){
             const newService = await response.json();
-            console.log('testing')
+
             this.setState({
                 vin:"",
                 custName:"",
                 apptDate:"",
-                // apptTime:"",
                 technician:"",
                 apptReason:"",
-                // vip:"",
                 status: "scheduled",
             });
         }
@@ -79,10 +71,6 @@ class NewApptForm extends React.Component {
         this.setState ({apptDate: value});
     }
 
-    // handleChangeTime(event) {
-    //     const value = event.target.value;
-    //     this.setState ({apptTime: value});
-    // }
 
     handleChangeTechnician(event) {
         const value = event.target.value;
@@ -99,10 +87,6 @@ class NewApptForm extends React.Component {
         this.setState ({status: value});
     }
 
-    // handleChangeVip(event) {
-    //     const value = event.target.value;
-    //     this.setState ({vip: value})
-    // }
 
     render() {
         return (
@@ -131,14 +115,6 @@ class NewApptForm extends React.Component {
                       <input onChange={this.handleChangeReason} value={this.state.apptReason} placeholder="reason" required type="text" name="reason" id="reason" className="form-control" />
                       <label htmlFor="reason">Reason for Appointment</label>
                     </div>
-                    {/* <div className="form-floating mb-3">
-                      <input onChange={this.handleChangeStatus} value={this.state.status} placeholder="status" required type="text" name="status" id="status" className="form-control" />
-                      <label htmlFor="status">Appointment Status</label>
-                    </div> */}
-                    {/* <div className="form-floating mb-3">
-                      <input onChange={this.handleChangeVip} value={this.state.vip} placeholder="vip" required type="vip" name="vip" id="vip" className="form-control" />
-                      <label htmlFor="vip">VIP Status</label>
-                    </div> */}
                     <button className="btn btn-primary">Create</button>
                   </form>
                 </div>
