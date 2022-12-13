@@ -1,5 +1,5 @@
 import React from "react"
-import NewManufacturerForm from "./NewManufacturerForm"
+
 
 
 class ManufacturerList extends React.Component {
@@ -18,27 +18,14 @@ class ManufacturerList extends React.Component {
         if(response.ok){
             const data = await response.json()
             this.setState({manufacturersArray: data.manufacturers})
-            // this.addManufacturer()
         }
     }
-
-
-    // addManufacturer(showFormValue){
-    //     this.setState({
-    //         showForm: showFormValue,
-    //     })
-    // }
-    // showForm(){
-    //     this.setState({showForm:!this.state.showForm})
-    // }
 
             render() {
                 return (
                     <>
-                        {/* {this.state.showForm?<NewManufacturerForm addManufacturer={this.addManufacturer.bind(this)}/>: */}
                         <div>
                         <h1>Manufacturers</h1>
-                        {/* <button type="button" className="btn btn-secondary" onClick={()=>{this.showForm()}}><a>Add new manufacturer</a></button> */}
                             <table className="table table-striped">
                                 <thead>
                                     <tr>
@@ -57,7 +44,6 @@ class ManufacturerList extends React.Component {
                                 </tbody>
                             </table>
                         </div>
-            {/* } */}
                     </>
                         )
                     }

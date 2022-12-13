@@ -40,8 +40,6 @@ def api_list_salesperson(request):
             encoder=SalesPersonListEncoder,
         )
     else:
-        # print("POST salesperson triggered")
-
         content = json.loads(request.body)
         salesperson = SalesPerson.objects.create(**content)
         return JsonResponse(
@@ -141,7 +139,7 @@ def api_show_customer(request, pk):
             )
         except Customer.DoesNotExist:
             return JsonResponse({"message": "Customer does not exist"})
-    else: # PUT
+    else:
         try:
             content = json.loads(request.body)
             customer = Customer.objects.get(id=pk)
@@ -173,7 +171,6 @@ def api_list_sales_record(request, inventory_vo_id=None):
             encoder=SalesRecordEncoder,
         )
     else:
-        # print("POST sales record triggered")
 
         content = json.loads(request.body)
         try:
@@ -197,7 +194,6 @@ def api_list_sales_record(request, inventory_vo_id=None):
                 status=400,
             )
         salesrecord = SalesRecord.objects.create(**content)
-        # print(salesrecord)
         return JsonResponse(
             salesrecord,
             encoder=SalesRecordEncoder,
@@ -229,7 +225,7 @@ def api_show_sales_record(request, pk):
             )
         except SalesRecord.DoesNotExist:
             return JsonResponse({"message": "Sales record does not exist"})
-    else: # PUT
+    else:
         try:
             content = json.loads(request.body)
             salesrecord = SalesRecord.objects.get(id=pk)

@@ -5,7 +5,7 @@ class SalesByEmployeeId extends React.Component{
         super(props);
 
         this.state = {
-            employees: this.props.salesPerson,
+            employees: [],
             salesRecords:[],
             salesPerson:""
         }
@@ -23,6 +23,13 @@ class SalesByEmployeeId extends React.Component{
         if(response.ok){
             const data = await response.json()
             this.setState({salesRecords: data.salesrecord})
+        }
+
+        const salespersonUrl = "http://localhost:8090/api/salesperson/"
+        const salespersonRes = await fetch(salespersonUrl)
+        if(salespersonRes.ok){
+            const salespersonData = await salespersonRes.json()
+            this.setState({employees: salespersonData.salesperson})
         }
     }
 

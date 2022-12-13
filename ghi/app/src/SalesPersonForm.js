@@ -30,7 +30,6 @@ class SalesPersonForm extends React.Component{
         const response = await fetch(url, fetchOptions)
         if(response.ok){
             const newSalesPerson = await response.json();
-            console.log(`Successfully added ${newSalesPerson.name}!`)
             this.setState({
                 name:"",
                 employeeNumber:""

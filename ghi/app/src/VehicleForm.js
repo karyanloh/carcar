@@ -17,7 +17,6 @@ class VehicleForm extends React.Component{
     }
 
     async componentDidMount(){
-        console.log(this.props.addVehicle)
         const url = "http://localhost:8100/api/manufacturers/"
         const response = await fetch(url)
         if(response.ok){
@@ -48,9 +47,6 @@ class VehicleForm extends React.Component{
         const response = await fetch(vehicleUrl, fetchOptions)
         if(response.ok){
             const newVehicle = await response.json();
-            //clean up data to send to vehicle list
-            // this.props.addVehicle(newVehicle)
-            // this.sendDataToList()
             this.setState({
                 name:"",
                 pictureUrl:"",
@@ -61,26 +57,17 @@ class VehicleForm extends React.Component{
     }
     handleChange(event, key){
         console.log(event, key)
-        //var value = event.target.value;
         var value = event
         this.setState({
             ...this.state,
             [key]: value
         })
-        // this.props.addVehicle(converted)
     }
     handleManufacturerChange(event){
         const value = event.target.value
         this.setState({manufacturerId:value})
     }
-    // sendDataToList(){
-    //     this.props.addVehicle(false)
-    //     this.setState({
-    //         name:"",
-    //         pictureUrl:"",
-    //         manufacturerId:""
-    //     })
-    // }
+
 
 
     render(){
@@ -116,8 +103,6 @@ class VehicleForm extends React.Component{
             </div>
             </div>
             </div>
-            {/* <div onClick={()=>{this.prepareFormData('abc')}}>add</div> */}
-            {/* <div onClick={()=>{this.props.addVehicle('data')}}>add</div> */}
             </>
         )
     };

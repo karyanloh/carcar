@@ -91,7 +91,6 @@ def api_list_appt(request, vin_vo_id=None):
         )
     else:
         content = json.loads(request.body)
-        print(content)
 
         try:
             tech_id = content["technician"]

@@ -12,15 +12,6 @@ class NewManufacturerForm extends React.Component {
         this.handleChangeName = this.handleChangeName.bind(this);
     }
 
-    // async componentDidMount(){
-    //     const url = "http://localhost:8100/api/manufacturers/"
-    //     const response = await fetch(url);
-    //     if(response.ok) {
-    //         const data = await response.json();
-    //         this.setState({name: data.names});
-    //     }
-    // }
-
     async handleSubmit(event) {
         event.preventDefault()
         const data = {...this.state}
@@ -39,20 +30,12 @@ class NewManufacturerForm extends React.Component {
             this.setState({
                 name: "",
             });
-            // this.sendDataToList()
         }
     }
     handleChangeName(event) {
         const value = event.target.value;
         this.setState({name: value});
     }
-    // sendDataToList(){
-    //     this.props.addManufacturer(false)
-    //     this.setState({
-    //         name: "",
-
-    //     })
-    // }
 
     render() {
         return (
