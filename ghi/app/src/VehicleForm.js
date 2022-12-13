@@ -50,7 +50,12 @@ class VehicleForm extends React.Component{
             const newVehicle = await response.json();
             //clean up data to send to vehicle list
             // this.props.addVehicle(newVehicle)
-            this.sendDataToList()
+            // this.sendDataToList()
+            this.setState({
+                name:"",
+                pictureUrl:"",
+                manufacturerId:""
+            })
 
         }
     }
@@ -68,14 +73,14 @@ class VehicleForm extends React.Component{
         const value = event.target.value
         this.setState({manufacturerId:value})
     }
-    sendDataToList(){
-        this.props.addVehicle(false)
-        this.setState({
-            name:"",
-            pictureUrl:"",
-            manufacturerId:""
-        })
-    }
+    // sendDataToList(){
+    //     this.props.addVehicle(false)
+    //     this.setState({
+    //         name:"",
+    //         pictureUrl:"",
+    //         manufacturerId:""
+    //     })
+    // }
 
 
     render(){

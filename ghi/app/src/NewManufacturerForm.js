@@ -36,24 +36,23 @@ class NewManufacturerForm extends React.Component {
         const response = await fetch(manufacturerUrl, fetchOptions);
         if (response.ok){
             const newManufacturer = await response.json();
-            // this.setState({
-            //     name: "",
-
-            // });
-            this.sendDataToList()
+            this.setState({
+                name: "",
+            });
+            // this.sendDataToList()
         }
     }
     handleChangeName(event) {
         const value = event.target.value;
         this.setState({name: value});
     }
-    sendDataToList(){
-        this.props.addManufacturer(false)
-        this.setState({
-            name: "",
+    // sendDataToList(){
+    //     this.props.addManufacturer(false)
+    //     this.setState({
+    //         name: "",
 
-        })
-    }
+    //     })
+    // }
 
     render() {
         return (

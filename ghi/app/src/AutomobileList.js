@@ -6,30 +6,39 @@ class AutomobileList extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            automobilesArray: this.props.automobile,
+            automobilesArray: [],
             showForm: false
         }
 
     }
-
-    addAutomobile(showFormValue){
-        this.setState({
-            showForm:showFormValue
-        })
-    }
-    showForm(){
-        this.setState({showForm:!this.state.showForm})
-    }
+    async componentDidMount(){
+        const url = "http://localhost:8100/api/automobiles/"
+        const response = await fetch(url)
+        if(response.ok){
+          const data = await response.json()
+          const vehicles = data.autos
+          // this.addVehicle()
+          this.setState({automobilesArray:vehicles})
+        }
+      }
+    // addAutomobile(showFormValue){
+    //     this.setState({
+    //         showForm:showFormValue
+    //     })
+    // }
+    // showForm(){
+    //     this.setState({showForm:!this.state.showForm})
+    // }
     render (){
         return (
             <>
             <div>
-                {this.state.showForm?
+                {/* {this.state.showForm?
                 <AutomobileForm addAutomobile={this.addAutomobile.bind(this)}/>
-                :
+                : */}
                 <div>
                 <h1>Automobiles Currently in Stock</h1>
-                <button type="button" className="btn btn-secondary" onClick={()=>{this.showForm()}}>Add new automobile</button>
+                {/* <button type="button" className="btn btn-secondary" onClick={()=>{this.showForm()}}>Add new automobile</button> */}
                     <table className="table table-striped">
                         <thead>
                             <tr>
@@ -56,7 +65,7 @@ class AutomobileList extends React.Component {
                         </tbody>
                     </table>
                     </div>
-                }
+                {/* } */}
 
                 </div>
                 </>

@@ -6,28 +6,39 @@ class ManufacturerList extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            manufacturersArray: this.props.manufacturer,
+            manufacturersArray: [],
             showForm: false
         }
 
     }
 
-    addManufacturer(showFormValue){
-        this.setState({
-            showForm: showFormValue
-        })
+    async componentDidMount(){
+        const url = "http://localhost:8100/api/manufacturers/"
+        const response = await fetch(url)
+        if(response.ok){
+            const data = await response.json()
+            this.setState({manufacturersArray: data.manufacturers})
+            // this.addManufacturer()
+        }
     }
-    showForm(){
-        this.setState({showForm:!this.state.showForm})
-    }
+
+
+    // addManufacturer(showFormValue){
+    //     this.setState({
+    //         showForm: showFormValue,
+    //     })
+    // }
+    // showForm(){
+    //     this.setState({showForm:!this.state.showForm})
+    // }
 
             render() {
                 return (
                     <>
-                        {this.state.showForm?<NewManufacturerForm addManufacturer={this.addManufacturer.bind(this)}/>:
+                        {/* {this.state.showForm?<NewManufacturerForm addManufacturer={this.addManufacturer.bind(this)}/>: */}
                         <div>
                         <h1>Manufacturers</h1>
-                        <button type="button" className="btn btn-secondary" onClick={()=>{this.showForm()}}><a>Add new manufacturer</a></button>
+                        {/* <button type="button" className="btn btn-secondary" onClick={()=>{this.showForm()}}><a>Add new manufacturer</a></button> */}
                             <table className="table table-striped">
                                 <thead>
                                     <tr>
@@ -46,7 +57,7 @@ class ManufacturerList extends React.Component {
                                 </tbody>
                             </table>
                         </div>
-            }
+            {/* } */}
                     </>
                         )
                     }

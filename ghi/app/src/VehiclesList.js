@@ -7,28 +7,37 @@ class VehiclesList extends React.Component{
         super(props);
 
         this.state={
-            vehiclesArray: this.props.vehicleModel,
+            vehiclesArray: [],
             showForm: false
         }
     }
 
-    addVehicle(showFormValue){
-        this.setState({
-            showForm:showFormValue
-        })
-    }
-    showForm(){
-        this.setState({showForm:!this.state.showForm})
-    }
+    // addVehicle(showFormValue){
+    //     this.setState({
+    //         showForm:showFormValue
+    //     })
+    // }
+    // showForm(){
+    //     this.setState({showForm:!this.state.showForm})
+    // }
 
-
+    async componentDidMount(){
+      const url = "http://localhost:8100/api/models/"
+      const response = await fetch(url)
+      if(response.ok){
+        const data = await response.json()
+        const vehicles = data.models
+        // this.addVehicle()
+        this.setState({vehiclesArray:vehicles})
+      }
+    }
 render(){
     return(
         <>
-        {this.state.showForm?<VehicleForm addVehicle={this.addVehicle.bind(this)}/>:
+        {/* {this.state.showForm?<VehicleForm addVehicle={this.addVehicle.bind(this)}/>: */}
         <div>
         <h1>Vehicle models</h1>
-         <button type="button" className="btn btn-secondary" onClick={()=>{this.showForm()}}><a>Add new vehicle</a></button>
+         {/* <button type="button" className="btn btn-secondary" onClick={()=>{this.showForm()}}><a>Add new vehicle</a></button> */}
          <table className="table table-striped">
             <thead>
               <tr>
@@ -51,7 +60,7 @@ render(){
             </tbody>
           </table>
           </div>
-            }
+            {/* } */}
           </>
     )
 }

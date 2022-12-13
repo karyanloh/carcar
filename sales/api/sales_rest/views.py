@@ -40,7 +40,7 @@ def api_list_salesperson(request):
             encoder=SalesPersonListEncoder,
         )
     else:
-        print("POST salesperson triggered")
+        # print("POST salesperson triggered")
 
         content = json.loads(request.body)
         salesperson = SalesPerson.objects.create(**content)
@@ -75,7 +75,7 @@ def api_show_salesperson(request, pk):
             )
         except SalesPerson.DoesNotExist:
             return JsonResponse({"message": "Sales person does not exist"})
-    else: # PUT
+    else:
         try:
             content = json.loads(request.body)
             salesperson = SalesPerson.objects.get(id=pk)
@@ -173,7 +173,7 @@ def api_list_sales_record(request, inventory_vo_id=None):
             encoder=SalesRecordEncoder,
         )
     else:
-        print("POST sales record triggered")
+        # print("POST sales record triggered")
 
         content = json.loads(request.body)
         try:
@@ -181,6 +181,7 @@ def api_list_sales_record(request, inventory_vo_id=None):
             inventory_href = content["inventory"]
             inventories = InventoryVO.objects.get(import_href=inventory_href)
             content["inventory"]= inventories
+
             # match salesperson
             employee_num = content["sales_person"]
             salesperson = SalesPerson.objects.get(employee_number=employee_num)
@@ -189,13 +190,14 @@ def api_list_sales_record(request, inventory_vo_id=None):
             customer_id= content["customer"]
             customer = Customer.objects.get(id=customer_id)
             content["customer"]= customer
+
         except (InventoryVO.DoesNotExist, SalesPerson.DoesNotExist, Customer.DoesNotExist):
             return JsonResponse(
                 {"message": "Unable to create order due to information mismatch"},
                 status=400,
             )
         salesrecord = SalesRecord.objects.create(**content)
-        print(salesrecord)
+        # print(salesrecord)
         return JsonResponse(
             salesrecord,
             encoder=SalesRecordEncoder,

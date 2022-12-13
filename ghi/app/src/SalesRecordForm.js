@@ -24,20 +24,16 @@ async componentDidMount(){
     const salesRes = await fetch(url)
     if(salesRes.ok){
         const salesData = await salesRes.json()
-        // console.log(salesData)
         const salesRecord = salesData.salesrecord
         const soldVehicles = []
         salesRecord.map(sales=> {soldVehicles.push(sales.inventory)})
-        // console.log(soldVehicles)
         const vehicleUrl = "http://localhost:8100/api/automobiles/"
         const vehicleRes = await fetch(vehicleUrl)
         if(vehicleRes.ok){
             const vehicleData = await vehicleRes.json()
-            // console.log(vehicleData)
             const vehicles = vehicleData.autos
-            // console.log(vehicles)
-            const availableVehicles = vehicles.filter(vehicle=> !soldVehicles.vin)
-            // console.log(availableVehicles)
+            console.log(vehicles)
+            const availableVehicles = vehicles.filter(vehicle=> !soldVehicles.includes(vehicle.vin))
             this.setState({automobiles:availableVehicles})
         }
     }
@@ -64,32 +60,15 @@ async handleSubmit(event){
 
     const response = await fetch(url, fetchOptions)
     if(response.ok){
-        this.updateAutomobileData()
-
+        this.setState({
+            automobile:"",
+            salesPerson: "",
+            customer:"",
+            price:"",
+        })
     }
 }
-updateAutomobileData(value){
 
-    const updatedAutomobile = [...this.state.automobiles]
-    // console.log(updatedAutomobile)
-
-    for(let i = 0; i < updatedAutomobile.length; i++){
-        if(updatedAutomobile[i]["href"] === value){
-            let index = updatedAutomobile.indexOf(updatedAutomobile["href"])
-            updatedAutomobile.splice(index, 1)
-            break
-        }else{
-            continue
-        }
-    }
-    this.setState({
-        automobile:"",
-        salesPerson: "",
-        customer:"",
-        price:"",
-        automobiles: updatedAutomobile
-    })
-}
 
 
 handleAutomobileChange(event){

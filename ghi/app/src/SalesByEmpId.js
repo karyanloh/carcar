@@ -6,7 +6,7 @@ class SalesByEmployeeId extends React.Component{
 
         this.state = {
             employees: this.props.salesPerson,
-            salesRecords:this.props.salesRecords,
+            salesRecords:[],
             salesPerson:""
         }
 
@@ -16,6 +16,14 @@ class SalesByEmployeeId extends React.Component{
     handleSalesPersonChange(event){
         const value = event.target.value
            this.setState({salesPerson:value})
+    }
+    async componentDidMount(){
+        const url = "http://localhost:8090/api/sales/"
+        const response = await fetch(url)
+        if(response.ok){
+            const data = await response.json()
+            this.setState({salesRecords: data.salesrecord})
+        }
     }
 
 

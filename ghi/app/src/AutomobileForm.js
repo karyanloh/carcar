@@ -47,7 +47,13 @@ class AutomobileForm extends React.Component{
         if(response.ok){
             const newAutomobile = await response.json();
             // console.log(newAutomobile)
-            this.sendDataToList()
+            // this.sendDataToList()
+            this.setState({
+                color: "",
+                year:"",
+                vin:"",
+                modelId:""
+            })
         }
     }
     handleChange(event, key){
@@ -64,15 +70,15 @@ class AutomobileForm extends React.Component{
         const value = event.target.value
         this.setState({modelId:value})
     }
-    sendDataToList(){
-        this.props.addAutomobile(false)
-        this.setState({
-            color: "",
-            year:"",
-            vin:"",
-            modelId:""
-        })
-    }
+    // sendDataToList(){
+    //     this.props.addAutomobile(false)
+    //     this.setState({
+    //         color: "",
+    //         year:"",
+    //         vin:"",
+    //         modelId:""
+    //     })
+    // }
 
 
     render(){
